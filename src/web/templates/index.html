@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction Prix Voiture - Prestige Motors</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Prédiction du Prix de Voiture</h1>
+        
+        <form method="POST">
+            <div class="form-group">
+                <label for="annee">Année du véhicule :</label>
+                <input type="number" id="annee" name="annee" required min="1900" max="2025">
+            </div>
+            
+            <div class="form-group">
+                <label for="valeur_entree">Valeur d'entrée (€) :</label>
+                <input type="number" id="valeur_entree" name="valeur_entree" required min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="kilometrage">Kilométrage :</label>
+                <input type="number" id="kilometrage" name="kilometrage" required min="0">
+            </div>
+            
+            <div class="form-group">
+                <label for="importance_moteur">État du moteur (0-5) :</label>
+                <input type="number" id="importance_moteur" name="importance_moteur" 
+                       min="0" max="5" required 
+                       title="0 = Très mauvais état, 5 = Excellent état">
+            </div>
+            
+            <div class="form-group">
+                <label for="importance_freins">État des freins (0-5) :</label>
+                <input type="number" id="importance_freins" name="importance_freins" 
+                       min="0" max="5" required
+                       title="0 = Très mauvais état, 5 = Excellent état">
+            </div>
+            
+            <button type="submit">Calculer la prédiction</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <h2>Résultat de la prédiction</h2>
+            <p>Valeur de sortie estimée : <span class="prediction-value">{{ prediction }}€</span></p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>

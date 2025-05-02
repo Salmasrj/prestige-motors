@@ -1,11 +1,6 @@
-make,model,year,price,status
-Toyota,Corolla,2020,20000,in stock
-Honda,Civic,2019,22000,in stock
-Ford,Mustang,2021,30000,in stock
-Chevrolet,Malibu,2018,18000,sold
-Nissan,Altima,2022,25000,in stock
-BMW,3 Series,2020,35000,in stock
-Audi,A4,2021,37000,in stock
-Mercedes-Benz,C-Class,2019,40000,in stock
-Volkswagen,Passat,2020,24000,in stock
-Subaru,Impreza,2021,23000,in stock
+Marque,Model,Année,ValeurEntrée,Statut,Kilométrage,Pièces,ValeurSortie
+Toyota,Corolla,2020,20000,in stock,15000,"[{""nom_pièce"": ""Moteur"", ""importance_pièce"": 5}, {""nom_pièce"": ""Freins"", ""importance_pièce"": 4}]",25000
+Honda,Civic,2019,22000,in stock,20000,"[{""nom_pièce"": ""Transmission"", ""importance_pièce"": 5}, {""nom_pièce"": ""Pneus"", ""importance_pièce"": 3}]",27000
+Ford,Mustang,2021,30000,in stock,10000,"[{""nom_pièce"": ""Suspension"", ""importance_pièce"": 4}, {""nom_pièce"": ""Échappement"", ""importance_pièce"": 3}]",35000
+Chevrolet,Malibu,2018,18000,sold,50000,"[{""nom_pièce"": ""Moteur"", ""importance_pièce"": 5}, {""nom_pièce"": ""Carrosserie"", ""importance_pièce"": 2}]",20000
+Nissan,Altima,2022,25000,in stock,5000,"[{""nom_pièce"": ""Phares"", ""importance_pièce"": 3}, {""nom_pièce"": ""Freins"", ""importance_pièce"": 4}]",30000

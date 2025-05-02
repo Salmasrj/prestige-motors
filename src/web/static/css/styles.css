@@ -1,0 +1,160 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #dad1de;
+    color: #555269;
+}
+
+h1, h2, h3 {
+    color: #2a2e70;
+}
+
+.header {
+    background-color: #4c68c0;
+    padding: 20px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.tab {
+    margin: 20px;
+    padding: 15px;
+    border: 1px solid #2a2e70;
+    border-radius: 8px;
+    background-color: #ffffff;
+}
+
+.button {
+    background-color: #4c68c0;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #2a2e70;
+}
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.alert-success {
+    background-color: #4c68c0;
+    color: white;
+}
+
+.alert-error {
+    background-color: #ff4c4c;
+    color: white;
+}
+
+.dashboard-card {
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.metric-value {
+    font-size: 24px;
+    font-weight: bold;
+    color: #4c68c0;
+}
+
+.status-in-stock {
+    background-color: rgba(76, 104, 192, 0.1);
+}
+
+.status-sold {
+    background-color: rgba(42, 46, 112, 0.1);
+}
+
+.status-in-delivery {
+    background-color: rgba(213, 209, 222, 0.3);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+body { 
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #333;
+}
+
+.form-group { 
+    margin-bottom: 20px;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+label { 
+    display: block; 
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #2c3e50;
+}
+
+input { 
+    width: 100%; 
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #4CAF50;
+    box-shadow: 0 0 5px rgba(76,175,80,0.2);
+}
+
+button { 
+    background-color: #4CAF50; 
+    color: white; 
+    padding: 12px 24px; 
+    border: none; 
+    border-radius: 4px;
+    cursor: pointer; 
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.result {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.result h2 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.prediction-value {
+    font-size: 24px;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.title {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 30px;
+}
