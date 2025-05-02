@@ -8,6 +8,15 @@ class CarPricePredictor:
     def __init__(self):
         self.model = None
         self.feature_names = ['Année', 'ValeurEntrée', 'Kilométrage', 'ImportancePieces']
+        self.pieces_uniques = set()
+
+    def get_unique_pieces(self, data_path):
+        df = pd.read_csv(data_path)
+        for pieces_str in df['Pièces']:
+            pieces = json.loads(pieces_str)
+            for piece in pieces:
+                self.pieces_uniques.add(piece['nom_pièce'])
+        return sorted(list(self.pieces_uniques))
 
     def process_pieces(self, pieces_str):
         pieces = json.loads(pieces_str) if isinstance(pieces_str, str) else pieces_str
@@ -17,6 +26,7 @@ class CarPricePredictor:
     def train(self, data_path):
         # Charger les données
         df = pd.read_csv(data_path)
+        self.get_unique_pieces(data_path)
 
         # Préparation des features
         X = pd.DataFrame()

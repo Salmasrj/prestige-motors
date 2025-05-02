@@ -10,7 +10,7 @@
     <div class="container">
         <h1 class="title">Prédiction du Prix de Voiture</h1>
         
-        <form method="POST">
+        <form method="POST" id="prediction-form">
             <div class="form-group">
                 <label for="annee">Année du véhicule :</label>
                 <input type="number" id="annee" name="annee" required min="1900" max="2025">
@@ -25,20 +25,18 @@
                 <label for="kilometrage">Kilométrage :</label>
                 <input type="number" id="kilometrage" name="kilometrage" required min="0">
             </div>
-            
-            <div class="form-group">
-                <label for="importance_moteur">État du moteur (0-5) :</label>
-                <input type="number" id="importance_moteur" name="importance_moteur" 
-                       min="0" max="5" required 
-                       title="0 = Très mauvais état, 5 = Excellent état">
+
+            <div class="form-group piece-selector">
+                <label>Ajouter une pièce à réparer :</label>
+                <select id="piece-select" onchange="addPieceInput(this.value); this.selectedIndex = 0;">
+                    <option value="">Sélectionner une pièce</option>
+                    {% for piece in pieces_disponibles %}
+                    <option value="{{ piece }}">{{ piece }}</option>
+                    {% endfor %}
+                </select>
             </div>
-            
-            <div class="form-group">
-                <label for="importance_freins">État des freins (0-5) :</label>
-                <input type="number" id="importance_freins" name="importance_freins" 
-                       min="0" max="5" required
-                       title="0 = Très mauvais état, 5 = Excellent état">
-            </div>
+
+            <div id="pieces-container"></div>
             
             <button type="submit">Calculer la prédiction</button>
         </form>
@@ -47,8 +45,44 @@
         <div class="result">
             <h2>Résultat de la prédiction</h2>
             <p>Valeur de sortie estimée : <span class="prediction-value">{{ prediction }}€</span></p>
+            
+            {% if model_metrics %}
+            <div class="model-metrics">
+                <h3>Métriques du modèle</h3>
+                <p>Score R² (entrainement) : {{ "%.3f"|format(model_metrics.train_score) }}</p>
+                <p>Score R² (test) : {{ "%.3f"|format(model_metrics.test_score) }}</p>
+            </div>
+            {% endif %}
         </div>
         {% endif %}
     </div>
+
+    <script>
+        function addPieceInput(pieceNom) {
+            if (!pieceNom) return;
+            
+            // Vérifier si la pièce existe déjà
+            if (document.querySelector(`input[value="${pieceNom}"]`)) {
+                alert('Cette pièce a déjà été ajoutée');
+                return;
+            }
+
+            const container = document.getElementById('pieces-container');
+            const pieceDiv = document.createElement('div');
+            pieceDiv.className = 'form-group piece-input';
+            pieceDiv.innerHTML = `
+                <label for="importance_${pieceNom}">Importance de ${pieceNom} (0-5) :</label>
+                <div class="piece-row">
+                    <input type="hidden" name="pieces[]" value="${pieceNom}">
+                    <input type="number" id="importance_${pieceNom}" 
+                           name="importance_${pieceNom}" min="0" max="5" required>
+                    <button type="button" class="remove-btn" onclick="this.parentElement.parentElement.remove()">
+                        Supprimer
+                    </button>
+                </div>
+            `;
+            container.appendChild(pieceDiv);
+        }
+    </script>
 </body>
 </html>

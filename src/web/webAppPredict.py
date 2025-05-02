@@ -7,39 +7,46 @@ root_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
 sys.path.append(root_dir)
 
 from src.model.predictor import CarPricePredictor
+import pandas as pd
+import json
 
 app = Flask(__name__)
 predictor = CarPricePredictor()
 
-# Initialiser et entraîner le modèle au démarrage
-DATA_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data', 'inventory.csv')
+# Chemin vers le fichier de données
+DATA_PATH = os.path.join(root_dir, 'data', 'inventory.csv')
+
+# Initialiser et entraîner le modèle
 model_metrics = predictor.train(DATA_PATH)
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
     prediction = None
-    if request.method == 'POST':
-        # Récupérer les données du formulaire
-        pieces = [
-            {
-                "nom_pièce": "Moteur",
-                "importance_pièce": int(request.form['importance_moteur'])
-            },
-            {
-                "nom_pièce": "Freins",
-                "importance_pièce": int(request.form['importance_freins'])
-            }
-        ]
-        
-        # Faire la prédiction
-        prediction = predictor.predict(
-            annee=int(request.form['annee']),
-            valeur_entree=float(request.form['valeur_entree']),
-            kilometrage=float(request.form['kilometrage']),
-            pieces=pieces
-        )
+    pieces_disponibles = predictor.get_unique_pieces(DATA_PATH)
     
-    return render_template('index.html', prediction=prediction)
+    if request.method == 'POST':
+        pieces = []
+        for piece_name in request.form.getlist('pieces[]'):
+            importance = request.form.get(f'importance_{piece_name}')
+            if importance:
+                pieces.append({
+                    "nom_pièce": piece_name,
+                    "importance_pièce": int(importance)
+                })
+        
+        try:
+            prediction = predictor.predict(
+                annee=int(request.form['annee']),
+                valeur_entree=float(request.form['valeur_entree']),
+                kilometrage=float(request.form['kilometrage']),
+                pieces=pieces
+            )
+        except ValueError as e:
+            return str(e), 400
+    
+    return render_template('index.html', 
+                         prediction=prediction, 
+                         pieces_disponibles=pieces_disponibles)
 
 if __name__ == '__main__':
     app.run(debug=True)
