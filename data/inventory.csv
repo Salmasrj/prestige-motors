@@ -1,0 +1,11 @@
+make,model,year,price,status
+Toyota,Corolla,2020,20000,in stock
+Honda,Civic,2019,22000,in stock
+Ford,Mustang,2021,30000,in stock
+Chevrolet,Malibu,2018,18000,sold
+Nissan,Altima,2022,25000,in stock
+BMW,3 Series,2020,35000,in stock
+Audi,A4,2021,37000,in stock
+Mercedes-Benz,C-Class,2019,40000,in stock
+Volkswagen,Passat,2020,24000,in stock
+Subaru,Impreza,2021,23000,in stock
